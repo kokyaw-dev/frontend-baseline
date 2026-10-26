@@ -32,28 +32,9 @@ All code must strictly adhere to the `DESIGN.md` specification (**Version: kds_v
 
 ---
 
-## 3. Tech Stack & Architecture
+## 3. Engineering & Behavioral Directives for Agents
 
-```text
-kds-components-library/
-├── src/
-│   ├── styles/
-│   │   ├── tokens.css        # Core design tokens (Primitives & Semantics)
-│   │   ├── utilities.css     # Layout, grid, elevation, motion utils
-│   │   └── components/       # Per-component Vanilla CSS modules
-│   ├── scripts/
-│   │   ├── kds-core.js       # Global initialization & state manager
-│   │   └── components/       # Component JS behaviors (e.g., accordion.js, flyout.js)
-│   └── components/astro/     # Native Astro components (.astro)
-├── public/
-└── DESIGN.md                 # Design Specifications (v1.2)
-```
-
----
-
-## 4. Engineering & Behavioral Directives for Agents
-
-### 4.1 Accessibility (`a11y`) First
+### 3.1 Accessibility (`a11y`) First
 1. **Focus Rings**:
    - Apply explicit focus rings during `:focus-visible` using `var(--kds-frost-2)`.
    - Syntax: `outline: 2px solid var(--kds-frost-2); outline-offset: 2px;`
@@ -64,7 +45,7 @@ kds-components-library/
 4. **No Auto-Focus**:
    - Never auto-focus inputs or triggers upon opening drawers/flyouts to avoid forced keypress overrides or mobile keyboard jumps.
 
-### 4.2 Motion Comfort (`prefers-reduced-motion`)
+### 3.2 Motion Comfort (`prefers-reduced-motion`)
 All animated CSS/JS components must respect user motion preferences:
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -79,9 +60,9 @@ All animated CSS/JS components must respect user motion preferences:
 
 ---
 
-## 5. Component Development Guidelines
+## 4. Component Development Guidelines
 
-### 5.1 Vanilla CSS/JS Components
+### 4.1 Vanilla CSS/JS Components
 - Components must be zero-dependency, standard ES Modules (`.js`).
 - State modifications must leverage HTML attributes (`data-state="open|closed"`, `aria-expanded="true|false"`, `inert`).
 
@@ -121,7 +102,8 @@ All animated CSS/JS components must respect user motion preferences:
 
 ---
 
-### 5.2 Astro Component Guidelines
+### 4.2 Astro Component Guidelines
+- Use 'pnpm' as default package manager. Use pnpm version 12+ and node.js version 24 or higher. 
 - Astro components must import their relative CSS module or share global token references.
 - Always expose standard HTML attributes via `Astro.props`.
 - Slot usage must support default and named content structures.
@@ -217,7 +199,7 @@ const { label, error, id, class: className = '', ...rest } = Astro.props;
 
 ---
 
-## 6. Verification & Quality Assurance Checklist
+## 5. Verification & Quality Assurance Checklist
 
 Agents generating code must self-verify deliverables against this checklist:
 
